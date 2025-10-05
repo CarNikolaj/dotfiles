@@ -1,0 +1,52 @@
+#!/bin/bash
+
+DIR=$HOME/Pictures/wallpapers/
+PICS=($(ls ${DIR}))
+
+RANDOMPICS=${PICS[ $RANDOM % ${#PICS[@]} ]}
+
+if [[ $(pidof swaybg) ]]; then
+  pkill swaybg
+fi
+
+swww query || swww-daemon
+
+
+#change-wallpaper using swww and color-sheme
+swww img ${DIR}/${RANDOMPICS} --transition-fps 60 --transition-type random --transition-duration 1
+wal -i  ${DIR}/${RANDOMPICS}  
+~/.config/hypr/pywal-colors.sh
+
+
+
+
+
+
+BG=$(awk 'NR==1' ~/.cache/wal/colors)      # Background color
+FG=$(awk 'NR==2' ~/.cache/wal/colors)      # Text color
+MATCH=$(awk 'NR==3' ~/.cache/wal/colors)   # Match highlight color
+SELECTION=$(awk 'NR==4' ~/.cache/wal/colors)  # Selection highlight color
+SELECTION_TEXT=$(awk 'NR==5' ~/.cache/wal/colors)  # Selected text color
+BORDER=$(awk 'NR==6' ~/.cache/wal/colors)  # Border color
+
+# Generate Fuzzel config with actual hex values
+cat <<EOF > ~/.config/fuzzel/fuzzel.ini
+[main]
+background = $BG
+text = $FG
+match = $MATCH
+selection = $SELECTION
+selection-text = $SELECTION_TEXT
+border = $BORDER
+EOF
+
+
+
+
+
+
+
+
+
+hyprctl reload
+

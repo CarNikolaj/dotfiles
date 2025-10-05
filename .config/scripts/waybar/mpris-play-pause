@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euo pipefail
+exec 9>"/tmp/mpris.lock"; flock -n 9 || exit 0
+playerctl -p playerctld play-pause
+

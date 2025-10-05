@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+###
+"mpris": {
+  "player": "playerctld",
+
+  "format": "{player_icon}  {title}",
+  "format-paused": "{player_icon}  {title}",
+  "format-stopped": "{player_icon}  stopped",
+
+  "format-alt": "{player_icon}",
+  "format-alt-click": "click-right",
+
+  "title-len": 32,
+  "dynamic-len": 32,
+  "max-length": 32,
+
+  "player-icons": {
+    "default": "",
+    "firefox": "",
+    "Chromium": "",
+    "mpv": "",
+    "vlc": "󰕼",
+    "spotify": "",
+    "jellyfin-media-player": "󰎁",
+    "mpd": ""
+  },
+###
+  "tooltip-format": "{player} • {status}\n{title}\n{album}\n{artist}",
+
+  "on-click": "~/.config/scripts/waybar/mpris-shift-only",
+  "on-click-middle": "~/.config/scripts/waybar/mpris-play-pause",
+
+  "on-click-right": "~/.config/waybar/0",
+
+  "on-scroll-up": "playerctl -p playerctld next || true",
+  "on-scroll-down": "playerctl -p playerctld previous || true"
+},
+

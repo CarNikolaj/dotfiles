@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+map=(▁ ▂ ▃ ▄ ▅ ▆ ▇ █)
+
+# Unbuffered lesen
+stdbuf -oL cava -p "$HOME/.config/cava/waybar.conf" 2>/dev/null | \
+while IFS= read -r line; do
+  # Semikolons -> Spaces (CAVA ascii trennt standardmäßig mit ';')
+  line=${line//;/ }
+
+  bars=""
+  for v in $line; do
+    # nur Zahlen verarbeiten
+    [[ $v =~ ^[0-9]+$ ]] || continue
+    (( v > 7 )) && v=7
+    (( v < 0 )) && v=0
+    bars+="${map[$v]}"
+  done
+  printf '{"text":"%s","class":"cava"}\n' "$bars"
+done
+

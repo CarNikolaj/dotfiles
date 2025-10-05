@@ -1,0 +1,158 @@
+/* ---------- 1) Pywal-Farben laden (GTK-kompatibel: @define-color) ---------- */
+@import url("colors-waybar.css");
+
+/* ---------- 2) Basistypo: nur monochrome Glyphen, keine bunten Emojis ---------- */
+* {
+  font-family: "JetBrainsMono Nerd Font", "Symbols Nerd Font", "Font Awesome 6 Free",
+               "DejaVu Sans Mono", monospace;
+  font-size: 13px;
+  color: @foreground;
+}
+
+/* ---------- 3) Bar: Root strikt transparent; nur die innere Box ist "Glas" ---------- */
+window#waybar {
+  background: transparent;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+window#waybar > box {
+  /* Dünnes Glas – niedrige Alpha, damit Blur/Vibrancy wirken */
+  background-color: alpha(@background, 0.12);
+  border: 1px solid alpha(@foreground, 0.08);
+  border-radius: 16px;
+  box-shadow:
+    0 10px 28px rgba(0,0,0,0.28),
+    inset 0 1px 0 rgba(255,255,255,0.12);
+  /* kein extra padding nötig – Module sind Chips */
+}
+
+/* ---------- 4) Einheitliche Chip-Optik für Module ---------- */
+#workspaces button,
+#clock, #pulseaudio, #network, #custom-vpn, #custom-cava, #battery, #tray, #window {
+  background: alpha(@background, 0.18);
+  border: 1px solid alpha(@foreground, 0.08);
+  border-radius: 12px;
+  box-shadow: inset 0 1px 0 alpha(@foreground, 0.10);
+  padding: 4px 10px;
+  margin: 3px 6px;
+}
+
+/* Workspaces links */
+#workspaces button {
+  background: alpha(@background, 0.20);
+  color: @color1;
+  border-radius: 18px;
+  border: 1px solid alpha(@foreground, 0.06);
+  box-shadow: inset 0 1px 0 alpha(@foreground,0.10);
+  padding: 0 10px;
+  margin: 3px 4px;
+}
+#workspaces button:hover {
+  background: alpha(@background, 0.24);                   /* etwas heller */
+  box-shadow: inset 0 1px 0 alpha(@foreground,0.14),
+              0 2px 6px rgba(0,0,0,0.18);                 /* zarter Lift */
+}#workspaces button.active  { background: alpha(@color4, 0.85); color: @background; }
+#workspaces button.urgent  { background: @color1; color: @background; }
+
+/* Mitte: Uhr etwas betont */
+#clock { font-weight: 600; }
+
+/* Rechts: VPN/Netz/Audio/App-Titel */
+#custom-vpn { font-weight: 600; }
+#pulseaudio.muted { opacity: 0.6; }
+
+/* CAVA (ASCII-Visualizer) im Akzentton wie active workspace */
+#custom-cava {
+  color: @color4;
+  letter-spacing: 0.4px;
+}
+
+/* ---------- 5) Tooltips allgemein (inkl. Calendar-Tooltip) ---------- */
+tooltip, .tooltip {
+  background: alpha(@background, 0.96);
+  color: @foreground;
+  border: 1px solid alpha(@foreground, 0.08);
+  border-radius: 12px;
+  box-shadow: 0 16px 42px rgba(0,0,0,0.35);
+  padding: 6px;
+}
+
+/* ---------- 6) Popup-Kalender rund & farbig ---------- */
+/* GTK3 & GTK4 abdecken */
+popover, .popover {
+  background: alpha(@background, 0.10);      /* noch transparenter */
+  border: 1px solid alpha(@foreground, 0.12);
+  border-radius: 14px;
+  box-shadow:
+    0 16px 42px rgba(0,0,0,0.35),
+    inset 0 1px 0 rgba(255,255,255,0.14);    /* feiner Glas-Glanz */
+  padding: 6px;
+}
+popover > contents, .popover > .contents { background: transparent; }
+
+calendar, .calendar { background: transparent; color: @foreground; border-radius: 12px; padding: 6px; }
+calendar:selected   { background: @color4; color: @background; border-radius: 8px; }
+calendar:hover      { background: alpha(@foreground, 0.06); border-radius: 8px; }
+
+#clock tooltip,
+#clock .tooltip,
+tooltip {
+  background: alpha(@background, 0.8);  /* Transparenz hier ändern (0.08–0.20) */
+  border: 1px solid alpha(@foreground, 0.12);
+  border-radius: 14px;
+  box-shadow:
+    0 16px 42px rgba(0,0,0,0.35),
+    inset 0 1px 0 rgba(255,255,255,0.14);
+  padding: 6px;
+}
+
+#clock tooltip > contents,
+#clock .tooltip > .contents {
+  background: transparent;
+}
+
+/* GTK-Calendar im Tooltip */
+#clock tooltip calendar,
+#clock .tooltip calendar {
+  background: transparent;
+  color: @foreground;
+  border-radius: 10px;
+  padding: 4px;
+}
+
+#clock tooltip calendar:selected,
+#clock .tooltip calendar:selected {
+  background: @color4;      /* Akzent wie aktive Workspaces */
+  color: @background;
+  border-radius: 8px;
+}
+
+#clock tooltip calendar:hover,
+#clock .tooltip calendar:hover {
+  background: alpha(@foreground, 0.06);
+  border-radius: 8px;
+}
+
+/*mpris*/
+/* ~/.config/waybar/style.css */
+#mpris {
+  background-color: alpha(@background, 0.18);
+  border: 1px solid alpha(@foreground, 0.08);
+  border-radius: 12px;
+  box-shadow: inset 0 1px 0 alpha(@foreground, 0.10);
+  padding: 4px 10px;
+  margin: 3px 6px;
+  color: @foreground;
+}
+
+#mpris.active, #mpris.mpd {
+  background-color: alpha(@background, 0.18);
+  border: 1px solid alpha(@foreground, 0.08);
+  border-radius: 12px;
+  box-shadow: inset 0 1px 0 alpha(@foreground, 0.10);
+  padding: 4px 10px;
+  margin: 3px 6px;
+  color: @foreground;
+}

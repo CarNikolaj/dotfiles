@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+set -euo pipefail
+exec 9>"/tmp/mpris.lock"; flock -n 9 || exit 0
+
+mapfile -t PLAYERS < <(playerctl -l 2>/dev/null || true)
+((${#PLAYERS[@]}==0)) && exit 0
+
+if ((${#PLAYERS[@]}==1)); then
+  for i in {1..3}; do
+    playerctl -p playerctld status >/dev/null 2>&1 && exit 0
+    playerctld unshift
+    sleep 0.10
+  done
+  exit 0
+fi
+
+oldname="$(playerctl -p playerctld metadata --format '{{playerName}}' 2>/dev/null || echo '')"
+
+for i in {1..6}; do
+  playerctld unshift
+  sleep 0.12
+  selname="$(playerctl -p playerctld metadata --format '{{playerName}}' 2>/dev/null || echo '')"
+  if [ -n "$selname" ]; then
+    [ "$selname" = "$oldname" ] && continue
+    exit 0
+  fi
+done
+
+for _ in "${PLAYERS[@]}"; do
+  playerctld unshift
+  sleep 0.12
+  playerctl -p playerctld status >/dev/null 2>&1 && exit 0
+done
+
+exit 0
+

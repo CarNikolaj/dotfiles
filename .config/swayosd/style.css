@@ -1,0 +1,49 @@
+/* wal-Farben laden (Pfad ggf. anpassen) */
+@import url("file:///home/niko/.cache/wal/colors-waybar.css");
+
+/* Glas-Box wie deine Chips */
+window#osd {
+  background: alpha(@background, 0.3);
+  border: 1px solid alpha(@foreground, 0.1);
+  border-radius: 18px;
+  padding: 8px 10px;
+  min-width: 230px;
+}
+
+/* Icon/Text in Akzent (wie active workspace) */
+window#osd label,
+window#osd image {
+  color: @color4;
+}
+
+/* ===== Variante: PROGRESSBAR (häufig in SwayOSD) ===== */
+window#osd progressbar { background: transparent; }
+window#osd progressbar trough {
+  background: alpha(@foreground, 0.16);
+  border-radius: 9999px;
+  min-height: 8px;
+}
+window#osd progressbar trough > progress {
+  background: @color4;          /* Füllfarbe = Akzent */
+  border-radius: 9999px;
+}
+
+/* ===== Variante: LEVELBAR (manche Builds) ===== */
+window#osd levelbar { background: transparent; }
+window#osd levelbar trough {
+  background: alpha(@foreground, 0.16);
+  border-radius: 9999px;
+  min-height: 8px;
+}
+/* gefüllte Segmente einfärben */
+window#osd levelbar trough > block.filled,
+window#osd levelbar block.filled {
+  background: @color4;
+  border-radius: 9999px;
+}
+/* leere Segmente transparent lassen */
+window#osd levelbar trough > block.empty,
+window#osd levelbar block.empty {
+  background: transparent;
+}
+

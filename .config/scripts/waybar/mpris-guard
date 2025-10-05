@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Gibt es überhaupt MPRIS-Player?
+players="$(playerctl -l 2>/dev/null || true)"
+
+# Hat playerctld gerade einen ausgewählten Player?
+sel_status="$(playerctl -p playerctld status 2>/dev/null || true)"
+
+# Fall: Es gibt Player, aber keiner ist ausgewählt -> Guard anzeigen
+if [ -n "$players" ] && [ -z "$sel_status" ]; then
+  printf '{"text":" auswählen","class":"guard"}\n'
+  exit 0
+fi
+
+# Sonst GAR NICHTS ausgeben (keine leere Zeile!)
+exit 0
+

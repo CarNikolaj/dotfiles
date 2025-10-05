@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+json_escape() { sed -e 's/\\/\\\\/g' -e 's/"/\\"/g' -e ':a;N;$!ba;s/\n/ /g'; }
+
+status="$(playerctl -p mpd status 2>/dev/null || true)"
+title="$(playerctl -p mpd metadata --format '{{title}}' 2>/dev/null | json_escape || true)"
+artist="$(playerctl -p mpd metadata --format '{{artist}}' 2>/dev/null | json_escape || true)"
+
+if [ -z "$status" ]; then
+  # MPD nicht selektiert / keine Bridge → Platzhalter
+  printf '{"text":"  MPD — idle","class":"idle","alt":"mpd"}\n'
+  exit 0
+fi
+
+case "$status" in
+  Playing) icon=""; class="playing" ;;
+  Paused)  icon=""; class="paused" ;;
+  Stopped) icon=""; class="stopped" ;;
+  *)       icon=""; class="$(echo "$status" | tr '[:upper:]' '[:lower:]')" ;;
+esac
+
+if [ -n "$title" ]; then
+  [ -n "$artist" ] && text="$icon  $title — $artist" || text="$icon  $title"
+else
+  text="$icon  MPD"
+fi
+
+printf '{"text":"%s","class":"%s","alt":"mpd"}\n' "$text" "$class"
+

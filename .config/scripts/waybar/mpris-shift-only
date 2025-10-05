@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Wie viele Player gibt's gerade?
+n=$(playerctl -l 2>/dev/null | sed '/^$/d' | wc -l || echo 0)
+
+# Wenn 0: nichts tun. Wenn 1: nur sicherstellen, dass einer selektiert ist, aber nicht shiften.
+if [ "$n" -lt 2 ]; then
+  playerctl -p playerctld status >/dev/null 2>&1 || playerctld shift || true
+  exit 0
+fi
+
+# Bei >=2 genau EINMAL shiften und kurz warten, bis playerctld "stabil" ist
+old=$(playerctl -p playerctld metadata --format '{{playerName}}' 2>/dev/null || echo '')
+playerctld shift || true
+# Debounce: bis zu 0.5 s warten, ohne weiter zu shiften
+for _ in 1 2 3 4 5; do
+  sel=$(playerctl -p playerctld metadata --format '{{playerName}}' 2>/dev/null || echo '')
+  [ -n "$sel" ] && break
+  sleep 0.1
+done
+# fertig – kein weiteres Springen
+exit 0
+
