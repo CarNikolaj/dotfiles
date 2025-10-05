@@ -5,13 +5,13 @@ My personal Hyprland dotfiles setup.
   - Transparent theme
   - Cava visualizer
   - MPD integration
-  - Additional custom modules
+  - Additional modules
 - **Fuzzel** – application launcher
 - **Mako** – notification daemon
 - **SwayOSD** – on-screen display
-- **Neovim** – configured with plugins
+- **Neovim** – configured with NVchad
 - **Kitty** – terminal emulator
 - **Swww** – wallpaper daemon
-- **Scripts** – helper scripts for daily workflow
+- **Scripts** – helper scripts 
 
 Everything is automatically themed with `wal`.
