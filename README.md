@@ -1,4 +1,5 @@
 My personal Hyprland dotfiles setup.
+___
 
 ## Features
 - **Waybar**
@@ -15,3 +16,32 @@ My personal Hyprland dotfiles setup.
 - **Scripts** – helper scripts 
 
 Everything is automatically themed with `wal`.
+
+___
+
+## Screenshots
+
+- Fullscreen
+
+![Fullscreen](./Pictures/Fullscreen.png)
+
+
+- Euphonica as MPD frontend
+
+![Euphonica](./Pictures/Euphonica.png)
+
+___
+
+- Bar
+
+![Bar1](./Pictures/Bar1.png)
+
+___
+
+![Bar2](./Pictures/Bar2.png)
+
+___
+
+![Bar3](./Pictures/Bar3.png)
+
+
