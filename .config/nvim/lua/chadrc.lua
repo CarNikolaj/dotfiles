@@ -21,6 +21,12 @@ M.base46 = {
 --      }
 --}
 
+M.ui = {
+  theme = "chadwal", -- Hier setzen wir das generierte Theme
+}
+
+return M
+
 vim.api.nvim_create_autocmd("FileType", {
   pattern = {"markdown", "gitcommit", "text"},
   callback = function()
