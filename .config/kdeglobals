@@ -1,0 +1,9 @@
+[Icons]
+Theme=Vivid-Glassy-Dark-Icons
+
+[KDE]
+ShowDeleteCommand=false
+
+[PreviewSettings]
+EnableRemoteFolderThumbnail=false
+MaximumRemoteSize=0

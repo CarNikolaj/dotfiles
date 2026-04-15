@@ -1,0 +1,24 @@
+[CompactMode]
+PreviewSize=64
+
+[General]
+BrowseThroughArchives=true
+GlobalViewProps=false
+Version=202
+ViewPropsTimestamp=2025,8,31,13,52,18.709
+
+[IconsMode]
+PreviewSize=112
+
+[KFileDialog Settings]
+Places Icons Auto-resize=false
+Places Icons Static Size=22
+
+[Notification Messages]
+ConfirmRenameFileType=false
+
+[PreviewSettings]
+Plugins=appimagethumbnail,audiothumbnail,glycin-heif,avif,blenderthumbnail,comicbookthumbnail,cursorthumbnail,djvuthumbnail,ebookthumbnail,exrthumbnail,directorythumbnail,heif,imagethumbnail,glycin-image-rs,jpegthumbnail,glycin-jxl,jxl,kraorathumbnail,windowsexethumbnail,windowsimagethumbnail,opendocumentthumbnail,librsvg,svgthumbnail,ffmpegthumbs
+
+[UiSettings]
+ColorScheme=CyberDolphin
