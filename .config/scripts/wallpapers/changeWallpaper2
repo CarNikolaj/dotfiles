@@ -311,5 +311,39 @@ CEOF
 
 
 
+# Generate Mako notification config with pywal colors
+cat <<MEOF > ~/.config/mako/config
+anchor=top-right
+font=mononoki Nerd Font 11
+background-color=${background}88
+text-color=${foreground}
+width=380
+height=120
+margin=10,10,0
+padding=15,20
+border-size=1
+border-color=${color2}66
+border-radius=12
+default-timeout=8000
+group-by=summary
+icon-path=/home/niko/.local/share/icons/Vivid-Glassy-Dark-Icons
+max-icon-size=48
+layer=overlay
+
+[urgency=low]
+border-color=${color2}44
+background-color=${background}66
+
+[urgency=critical]
+border-color=${color1}aa
+background-color=${color1}33
+default-timeout=0
+
+[grouped]
+format=<b>%s</b>\n%b
+MEOF
+
+makoctl reload 2>/dev/null
+
 hyprctl reload
 

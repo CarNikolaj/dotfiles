@@ -1,15 +1,28 @@
 anchor=top-right
-font=mononoki Nerd Font 10
-background-color=#24283b
-text-color=#c0caf5
-width=350
-margin=0,20,20
-padding=10
-border-size=2
-border-color=#414868
-border-radius=5
-default-timeout=10000
+font=mononoki Nerd Font 11
+background-color=#04040788
+text-color=#ddcde4
+width=380
+height=120
+margin=10,10,0
+padding=15,20
+border-size=1
+border-color=#716CCB66
+border-radius=12
+default-timeout=8000
 group-by=summary
+icon-path=/home/niko/.local/share/icons/Vivid-Glassy-Dark-Icons
+max-icon-size=48
+layer=overlay
+
+[urgency=low]
+border-color=#716CCB44
+background-color=#04040766
+
+[urgency=critical]
+border-color=#5E5BA2aa
+background-color=#5E5BA233
+default-timeout=0
 
 [grouped]
 format=<b>%s</b>\n%b
